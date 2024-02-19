@@ -1,6 +1,9 @@
 package chess;
 
 import boardgame.Board;
+import boardgame.Position;
+import chess.pieces.King;
+import chess.pieces.Rook;
 
 public class ChessMatch {// chessMatch= partida de xadrez
 
@@ -9,6 +12,7 @@ public class ChessMatch {// chessMatch= partida de xadrez
 	public ChessMatch() {
 
 		board = new Board(8, 8);
+		initialSetup();
 	}
 
 	// este metodo vai percorre o board/tabuleiro, e para cada peça no board
@@ -25,5 +29,11 @@ public class ChessMatch {// chessMatch= partida de xadrez
 		}
 
 		return mat;// aqui retorna as peças da partida de xadrez 
+	}
+	
+	private void initialSetup() {
+		board.placePice(new Rook(board,Color.WHITE),new Position(2,1) );
+		board.placePice(new King(board, Color.BLACK),new Position(0,4));
+		board.placePice(new King(board, Color.WHITE),new Position(7,4));
 	}
 }
