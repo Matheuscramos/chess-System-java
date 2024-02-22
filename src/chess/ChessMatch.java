@@ -30,10 +30,22 @@ public class ChessMatch {// chessMatch= partida de xadrez
 
 		return mat;// aqui retorna as peças da partida de xadrez 
 	}
+	//este metodo ira informar a posição das peça no xadrez usando o toPosition da classe chessPosition
+	// ele recebe as coordenadas do xadrez
+	private void placeNewPiece(char column, int row, ChessPiece piece) {
+		//o metodo chama o board
+		board.placePice(piece, new ChessPosition(column, row).toPosition());
+	}
 	
 	private void initialSetup() {
-		board.placePice(new Rook(board,Color.WHITE),new Position(2,1) );
-		board.placePice(new King(board, Color.BLACK),new Position(0,4));
-		board.placePice(new King(board, Color.WHITE),new Position(7,4));
+		// com base no metodo private void placNewPoece()
+		//vai ser substituido o new position pelas posições do xadrez
+		
+		//board.placePice(new Rook(board,Color.WHITE),new Position(2,1) );
+		//board.placePice(new King(board, Color.BLACK),new Position(2,1));
+		//board.placePice(new King(board, Color.WHITE),new Position(7,4));
+		placeNewPiece('b',6,new Rook(board,Color.WHITE) );
+		placeNewPiece('e',8,new King(board, Color.BLACK));
+		placeNewPiece('e',1,new King(board, Color.WHITE));
 	}
 }
