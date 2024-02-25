@@ -1,11 +1,15 @@
 package application;
 
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
 import chess.ChessPiece;
+import chess.ChessPosition;
 import chess.Color;
 
 public class UI {
 
-	// https://stackoverflow.com/questions/5762491/how-to-print-color-in-console-using-system-out-println
+	
 
 	public static final String ANSI_RESET = "\u001B[0m";
 	public static final String ANSI_BLACK = "\u001B[30m";
@@ -25,7 +29,28 @@ public class UI {
 	public static final String ANSI_PURPLE_BACKGROUND = "\u001B[45m";
 	public static final String ANSI_CYAN_BACKGROUND = "\u001B[46m";
 	public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
-
+	
+	
+	//este método ira ler uma posição do usuário.
+	// o método recebe o scanner do programa principal
+	public static ChessPosition readChessPosition(Scanner sc) {
+		
+		try {
+		// para ler as posições que sera digitadas com letras e numeros misturados
+		// e necessario fazer um recorte de String separando a letra do número ex:a1
+		String s = sc.nextLine();
+		// aqui eu leio a string ex: a1
+		char column = s.charAt(0); //aqui eu pego a string que começa com 0, que no caso e a letra 'a'
+		int row = Integer.parseInt(s.substring(1));//e aqui e recortado  string apartir da posição 1 e converte para inteiro.
+		// agora retorna uma nova newChesPosition(com a coluna e a linha separadas);
+		return new ChessPosition(column, row);
+		}
+		catch(RuntimeException e) {
+			throw new InputMismatchException("Error reading ChessPosition. Valid Values are from a1 to h8.");
+		}
+		
+	} 
+	
 	public static void printBoard(ChessPiece[][] pieces) {
 		for (int i = 0; i < pieces.length; i++) {
 			System.out.print((8 - i) + " ");

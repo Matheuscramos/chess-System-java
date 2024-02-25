@@ -69,9 +69,31 @@ public class Board {
 		// pieces e a matriz de peças[position.getRow()][position.getColumn()] = piece;
 		// essa
 	}
+	
+	public Piece removePiece(Position position) {
+		// if faz uma analise defensiva, checand se a posição da peça existe
+		if(!positionExists(position)) {
+			throw new BoardException("Position not the board");
+		}
+		// se a peça na posição for igual a nulo, significa que não tem nem uma peça nessa posição
+		if(piece(position) == null) {
+			//se não tem peça na posição retorna nulo.
+			return null;
+		}
+		//se a posição não retornar nulo, ai sera feira a retirada da peça do tabuleiro
+		// a variavel aux aponta para a peça 
+		Piece aux = piece(position);
+		// Aqui a variavel aux recebe a posição nula e e retirada do tabuleiro.
+		aux.position = null;
+		//essa matriz de peças pieces[] na linha position.getRow() na posição position.getColoumn()vai receber nulo
+		//então a peça no tabuileiro e colocada como nula, e depois e direcionada para as posições da matriz.
+		pieces[position.getRow()][position.getColumn()] = null;
+		// agora a variavel aux retorna a peça que foi retirada;
+		return aux;
+	}
+	
 	// este metodo pega um linha e uma coluna no tabuleiro e checa se ela e valida
 	// ou não!
-
 	public boolean positionExists(int row, int column) {
 		return row >= 0 && row < rows && column >= 0 && column < columns;
 		// rows e a altura e columns e a quantidade de colunas

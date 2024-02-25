@@ -1,6 +1,7 @@
 package chess;
 
 import boardgame.Board;
+import boardgame.Piece;
 import boardgame.Position;
 import chess.pieces.King;
 import chess.pieces.Rook;
@@ -30,6 +31,44 @@ public class ChessMatch {// chessMatch= partida de xadrez
 
 		return mat;// aqui retorna as peças da partida de xadrez 
 	}
+	//este método ira ter uma posição de origem( sourcePosition), uma posição de destino(ChessPosition targetPosition ) , eeste método podera retornar uma posição capturada.
+	public ChessPiece performChessMove(ChessPosition sourcePosition, ChessPosition targetPosition ) {
+		// a posição de origem e de destinos seram convertidas em posições da matriz.
+		Position source = sourcePosition.toPosition();
+		Position target = targetPosition.toPosition();
+		//Antes de fazer o movimento tem que ser feita a validação se nas posições de origem avia uma peça.
+		validateSourcePosition(source);
+		//esta operação será responsavel por fazer o movimento da peça.
+		Piece capturedPiece = makeMove(source, target);
+		//agora e retornada a peça capturada.
+		// e é feito um 
+		return (ChessPiece)capturedPiece;
+	}
+	//este metodo faz o movimento das peças de xadrez no tabuleiro
+	private Piece makeMove(Position source, Position target) {
+		// removeu a peça de origem.
+		Piece p = board.removePiece(source);
+		// será removido a peça na posição de destino
+		Piece capturedPiece = board.removePiece(target);
+		// agora a posição que estava na origem sera colocada na de destino.
+		board.placePice(p, target);
+		
+		return capturedPiece ;
+	}
+	// este método faz a validação da posição de origem.
+	private void validateSourcePosition(Position position) {
+		//Se não existir uma peça nessa posição, será lançada uma exceção.
+		if(!board.thereIsAPiece(position)) {
+			throw new ChessException("There is no piece on source position!");
+		}
+	} 
+	
+	
+	
+	
+	
+	
+	
 	//este metodo ira informar a posição das peça no xadrez usando o toPosition da classe chessPosition
 	// ele recebe as coordenadas do xadrez
 	private void placeNewPiece(char column, int row, ChessPiece piece) {
