@@ -61,6 +61,13 @@ public class ChessMatch {// chessMatch= partida de xadrez
 		if(!board.thereIsAPiece(position)) {
 			throw new ChessException("There is no piece on source position!");
 		}
+		//Se não existe movimentos possivéis para a peça, será lançada uma excessão.
+		// 
+		if(!board.piece(position).isThereAnyPossibleMove()) {
+			throw new ChessException("There is no possible moves for the chosen piece");
+			
+		}
+		
 	} 
 	
 	
