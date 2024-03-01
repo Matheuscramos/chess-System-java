@@ -21,7 +21,7 @@ public abstract class Piece {
 	// Este método confirma se o movimento da peça e possivel, ele recebe uma
 	// posição e confirma se a peça pode ir para essa dada posição.
 
-	public boolean possibeMove(Position position) {
+	public boolean possibleMove(Position position) {
 		// No retorno está sendo usado um metodo abstrato dentro de um metodo concreto.
 		// onde e retornado a matriz boolean com uma posição e coluna.
 		// essa ação e chamada de hookmetodo, e um método que faz um gancho com a sub
