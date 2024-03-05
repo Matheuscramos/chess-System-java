@@ -32,6 +32,14 @@ public class ChessMatch {// chessMatch= partida de xadrez
 
 		return mat;// aqui retorna as peças da partida de xadrez
 	}
+	//Este Método testa as possiveis posiçoes que estão livres para jogar.
+	public boolean[][] possibleMoves(ChessPosition sourcePosition){
+		Position position = sourcePosition.toPosition();
+		validateSourcePosition(position);
+		return board.piece(position).possibleMoves();
+	}
+	
+	
 
 	// este método ira ter uma posição de origem( sourcePosition), uma posição de
 	// destino(ChessPosition targetPosition ) , eeste método podera retornar uma
